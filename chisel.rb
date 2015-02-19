@@ -12,32 +12,38 @@ document = '# My Life in Desserts
 
   def parse_h1(line)
     if line[0] == "#"
-      "<h1>"
+      line.sub("#", "<h1>")
     end
   end
 
   def parse_h2(line)
     if line[0..1] == "##"
-      "<h2>"
+      line.sub("##", "<h2>")
     end
   end
 
   def parse_h3(line)
     if line[0..2] == "###"
-      "<h3>"
+      line.sub("###", "<h3>")
     end
   end
 
   def parse_h4(line)
     if line[0..3] == "####"
-      "<h4>"
+      line.sub("####", "<h4>")
     end
   end
 
   def parse_h5(line)
     if line[0..4]
-      "<h5>"
+      line.sub("#####", "<h5>")
     end
+  end
+
+  def parse_p(line)
+    if line[0] != "#"
+     "<p>"
+   end
   end
 
 end

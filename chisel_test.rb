@@ -64,6 +64,16 @@ class ChiselTest < Minitest::Test
     assert_equal "<h5>", chisel.parse_h5("#####")
   end
 
+  def test_parse_p_tag_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_p)
+  end
+
+  def test_parser_changes_test_to_p
+    chisel = Chisel.new
+    assert_equal "<p>", chisel.parse_p("test line")
+  end
+
 
 
 end
