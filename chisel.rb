@@ -6,21 +6,39 @@ document = '# My Life in Desserts
 
 "You just *have* to try the cheesecake," he said. "Ever since it appreared in **Food & Wube** this place has been packed every night."'
 
-def parser
+  def parser
 
-end
-
-def parse_h1(line)
-  if line[0] == "#"
-    "<h1>"
   end
-end
 
-def parse_h2(line)
-  if line[0..1] == "##"
-    "<h2>"
+  def parse_h1(line)
+    if line[0] == "#"
+      "<h1>"
+    end
   end
-end
+
+  def parse_h2(line)
+    if line[0..1] == "##"
+      "<h2>"
+    end
+  end
+
+  def parse_h3(line)
+    if line[0..2] == "###"
+      "<h3>"
+    end
+  end
+
+  def parse_h4(line)
+    if line[0..3] == "####"
+      "<h4>"
+    end
+  end
+
+  def parse_h5(line)
+    if line[0..4]
+      "<h5>"
+    end
+  end
 
 end
 

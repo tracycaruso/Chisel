@@ -26,12 +26,42 @@ class ChiselTest < Minitest::Test
 
   def test_parse_h2_exists
     chisel = Chisel.new
-    assert chisel.respond_to?(:parse_h2)
+
   end
 
   def test_parser_changes_test_to_h2
     chisel = Chisel.new
     assert_equal "<h2>", chisel.parse_h2("##")
+  end
+
+  def test_parse_h3_exisits
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_h3)
+  end
+
+  def test_parser_changes_test_to_h3
+    chisel = Chisel.new
+    assert_equal "<h3>", chisel.parse_h3("###")
+  end
+
+  def test_parse_h4_exisits
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_h4)
+  end
+
+  def test_parser_changes_test_to_h4
+    chisel = Chisel.new
+    assert_equal "<h4>", chisel.parse_h4("####")
+  end
+
+  def test_parse_h5_exisits
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_h5)
+  end
+
+  def test_parser_changes_test_to_h5
+    chisel = Chisel.new
+    assert_equal "<h5>", chisel.parse_h5("#####")
   end
 
 
