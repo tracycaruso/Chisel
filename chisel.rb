@@ -6,9 +6,7 @@ document = '# My Life in Desserts
 
 "You just *have* to try the cheesecake," he said. "Ever since it appreared in **Food & Wube** this place has been packed every night."'
 
-  def parser
 
-  end
 
   def parse_h1(line)
     if line[0] == "#"
@@ -49,6 +47,11 @@ document = '# My Life in Desserts
 
   def break_line(line)
     line.lines.map(&:chomp).reject{|l| l.empty?}
+  end
+
+
+  def parse(line)
+    "Test input"
   end
 
 

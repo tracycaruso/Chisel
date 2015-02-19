@@ -9,11 +9,6 @@ class ChiselTest < Minitest::Test
     assert Chisel
   end
 
-  def test_parser_exists
-    chisel = Chisel.new
-    assert chisel.respond_to?(:parser)
-  end
-
   def test_parse_h1_exists
     chisel = Chisel.new
     assert chisel.respond_to?(:parse_h1)
@@ -93,5 +88,21 @@ class ChiselTest < Minitest::Test
     chisel = Chisel.new
     assert_equal ["This is", "a line", "This is", "a new line"], chisel.break_line("This is\n\na line\n\nThis is\na new line")
   end
+
+  def test_parser_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse)
+  end
+
+  def test_parser_takes_input
+    chisel = Chisel.new
+    assert_equal "Test input", chisel.parse("Test input")
+  end
+
+  def test_parser_checks_for_one_hash
+    chisel = Chisel.new
+    assert_equal "Test input", chisel.parse("Test input")
+  end
+
 
 end
