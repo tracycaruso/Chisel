@@ -21,7 +21,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_h1
     chisel = Chisel.new
-    assert_equal "<h1>", chisel.parse_h1("#")
+    assert_equal "<h1>This is a line</h1>", chisel.parse_h1("#This is a line")
   end
 
   def test_parse_h2_exists
@@ -31,7 +31,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_h2
     chisel = Chisel.new
-    assert_equal "<h2>", chisel.parse_h2("##")
+    assert_equal "<h2>This is a line</h2>", chisel.parse_h2("##This is a line")
   end
 
   def test_parse_h3_exisits
@@ -41,7 +41,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_h3
     chisel = Chisel.new
-    assert_equal "<h3>", chisel.parse_h3("###")
+    assert_equal "<h3>This is a line</h3>", chisel.parse_h3("###This is a line")
   end
 
   def test_parse_h4_exisits
@@ -51,7 +51,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_h4
     chisel = Chisel.new
-    assert_equal "<h4>", chisel.parse_h4("####")
+    assert_equal "<h4>This is a line</h4>", chisel.parse_h4("####This is a line")
   end
 
   def test_parse_h5_exisits
@@ -61,7 +61,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_h5
     chisel = Chisel.new
-    assert_equal "<h5>", chisel.parse_h5("#####")
+    assert_equal "<h5>This is a line</h5>", chisel.parse_h5("#####This is a line")
   end
 
   def test_parse_p_tag_exists
@@ -71,7 +71,7 @@ class ChiselTest < Minitest::Test
 
   def test_parser_changes_test_to_p
     chisel = Chisel.new
-    assert_equal "<p>", chisel.parse_p("test line")
+    assert_equal "<p>test line</p>", chisel.parse_p("test line")
   end
 
 
