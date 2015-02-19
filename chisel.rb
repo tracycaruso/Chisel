@@ -10,8 +10,16 @@ def parser
 
 end
 
-def parse_h1(h1)
-  "<h1>"
+def parse_h1(line)
+  if line[0] == "#"
+    "<h1>"
+  end
+end
+
+def parse_h2(line)
+  if line[0..1] == "##"
+    "<h2>"
+  end
 end
 
 end
