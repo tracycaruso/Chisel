@@ -47,7 +47,16 @@ document = '# My Life in Desserts
    end
   end
 
+  def break_line(line)
+    line.lines.map(&:chomp).reject{|l| l.empty?}
+  end
+
+
+
 end
+
+
+
 
 #parser = Chisel.new
 #output = parser.parse(document)

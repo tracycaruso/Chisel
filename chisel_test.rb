@@ -74,6 +74,24 @@ class ChiselTest < Minitest::Test
     assert_equal "<p>test line</p>", chisel.parse_p("test line")
   end
 
+  def test_break_line_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:break_line)
+  end
 
+  def test_breaks_lines_by_new_line_char
+    chisel = Chisel.new
+    assert_equal ["This is", " a line"], chisel.break_line("This is\n a line")
+  end
+
+  def test_breaks_lines_by_two_new_line_char
+    chisel = Chisel.new
+    assert_equal ["This is", " a line"], chisel.break_line("This is\n\n a line")
+  end
+
+  def test_breaks_lines_with_multiple_newlines
+    chisel = Chisel.new
+    assert_equal ["This is", "a line", "This is", "a new line"], chisel.break_line("This is\n\na line\n\nThis is\na new line")
+  end
 
 end
