@@ -124,5 +124,8 @@ class ChiselTest < Minitest::Test
     assert_equal "<h1>Test input</h1>", chisel.parse_headers("#Test input")
   end
 
+  def passes_through_each_line
+
+  end
 
 end
