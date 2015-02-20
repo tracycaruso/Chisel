@@ -3,8 +3,8 @@ class Chisel
   def parse(line)
     array_of_lines = break_line(line)
     cycle_through_lines(array_of_lines)
-    #single_words = break_line_to_words(array_of_lines)
-    #parse_asterisks(single_words)
+    single_words = break_line_to_words(array_of_lines)
+    cycle_through_words(single_words)
   end
 
   def break_line(line)
@@ -16,47 +16,53 @@ class Chisel
     line = line.map {|l| parse_headers(l)}
   end
 
+  def cycle_through_words(line)
+    line = line.map{|l| parse_asterisks(line)}
+  end
+
   def parse_p(line)
     if !(line[0] == "#" || line[0] == "<")
       line.insert(0, "<p>")
       line.insert(-1, "</p>")
       puts "paragraph"
     end
-   line
+  line
   end
 
-  # def parse_asterisks(line)
-  #   if line[0..1] == "**"
-  #     parse_strong_first(line)
-  #   elsif line[0] == "*"
-  #     parse_emphasis_first(line)
-  #   elsif line[-2..-1] == "**"
-  #     parse_strong_last(line)
-  #   elsif line[-1] == "*"
-  #     parse_emphasis_last(line)
-  #   end
-  # end
-  #
-  #
-  # def break_line_to_words(line)
-  #   line.join(" ").split
-  # end
-  #
-  # def parse_strong_first(line)
-  #   line.sub!("**", "<strong>")
-  # end
-  #
-  # def parse_emphasis_first(line)
-  #     line.sub!("*", "<em>")
-  # end
-  #
-  # def parse_strong_last(line)
-  #     line.sub!("**", "</strong>")
-  # end
-  #
-  # def parse_emphasis_last(line)
-  #     line.sub!("*", "</em>")
-  # end
+
+  def parse_asterisks(line)
+    if line[0..1] == "**"
+      parse_strong_first(line)
+    elsif line[0] == "*"
+      parse_emphasis_first(line)
+    elsif line[-2..-1] == "**"
+      parse_strong_last(line)
+    elsif line[-1] == "*"
+      parse_emphasis_last(line)
+    end
+    line
+  end
+
+
+  def break_line_to_words(line)
+    line.join(" ").split
+  end
+
+  def parse_strong_first(line)
+     line.sub!("**", "<strong>")
+  end
+
+  def parse_emphasis_first(line)
+      line.sub!("*", "<em>")
+  end
+
+  def parse_strong_last(line)
+      line.sub!("**", "</strong>")
+  end
+
+  def parse_emphasis_last(line)
+      line.sub!("*", "</em>")
+  end
 
   def parse_headers(line)
     if line[0..4] == "#####"
@@ -70,6 +76,7 @@ class Chisel
     elsif line[0] == "#"
       parse_h1(line)
     end
+    line
   end
 
   def parse_h1(line)
@@ -108,3 +115,4 @@ document = '# My Life in Desserts
 parser = Chisel.new
 output = parser.parse(document)
 puts output
+#puts output
