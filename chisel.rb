@@ -24,7 +24,15 @@ class Chisel
   end
 
   def break_line_to_words(line)
+    #line.each do |l|
+    #end
     ["broken", "line"]
+  end
+
+  def parse_strong(line)
+    if line[0..1] == "**"
+      line.gsub("**", "<strong>")
+    end
   end
 
   def parse_emphasis(line)

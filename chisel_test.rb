@@ -124,12 +124,23 @@ class ChiselTest < Minitest::Test
     #no idea
   end
 
-  def test_parser_exists
+  def test_parse_strong_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_strong)
+  end
+
+  def test_converts_double_asterisks_to_strong_tags
+    chisel = Chisel.new
+    assert_equal "<strong>broken", chisel.parse_strong("**broken")
+  end
+
+  def test_parse_emphasis_exists
     chisel = Chisel.new
     assert chisel.respond_to?(:parse_emphasis)
   end
 
   def test_converts_single_asterisks_to_em_tags
+    skip
     chisel = Chisel.new
     assert_equal "<em>Test input</em>", chisel.parse_emphasis("*Test input*")
   end
