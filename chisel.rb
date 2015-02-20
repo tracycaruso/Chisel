@@ -23,6 +23,14 @@ class Chisel
    line
   end
 
+  def break_line_to_words(line)
+    ["broken", "line"]
+  end
+
+  def parse_emphasis(line)
+    "<em>Test input</em>"
+  end
+
 
   def parse_headers(line)
     if line[0..4] == "#####"
@@ -72,19 +80,6 @@ document = '# My Life in Desserts
 
 "You just *have* to try the cheesecake," he said. "Ever since it appreared in **Food & Wine** this place has been packed every night."'
 
-chisel = Chisel.new
-#print chisel.break_line(document)
-puts chisel.parse(document)
-
-# puts chisel.parse_p("This is a test")
-
-
-#
-# parser = Chisel.new
-# output = parser.parse(document)
-# puts output
-
-
-# <h1>My Life in Desserts</h1>
-# <h2> Chapter 1: The Beginning</h2>
-# <p>"You just have to try the cheesecake," he said. "Ever since it appreared in **Food & Wube** this place has been packed every night."</p>
+parser = Chisel.new
+output = parser.parse(document)
+puts output

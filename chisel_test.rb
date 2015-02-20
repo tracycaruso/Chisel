@@ -94,11 +94,6 @@ class ChiselTest < Minitest::Test
     assert chisel.respond_to?(:parse)
   end
 
-  def test_parser_takes_input
-    chisel = Chisel.new
-    assert_equal "Test input", chisel.parse("Test input")
-  end
-
   def test_checks_for_five_hashes
     chisel = Chisel.new
     assert_equal "<h5>Test input</h5>", chisel.parse_headers("#####Test input")
@@ -124,8 +119,29 @@ class ChiselTest < Minitest::Test
     assert_equal "<h1>Test input</h1>", chisel.parse_headers("#Test input")
   end
 
-  def passes_through_each_line
+  def test_passes_through_each_line
+    chisel = Chisel.new
+    #no idea
+  end
 
+  def test_parser_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_emphasis)
+  end
+
+  def test_converts_single_asterisks_to_em_tags
+    chisel = Chisel.new
+    assert_equal "<em>Test input</em>", chisel.parse_emphasis("*Test input*")
+  end
+
+  def test_break_line_to_words_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:break_line_to_words)
+  end
+
+  def test_break_line_into_words
+    chisel = Chisel.new
+    assert_equal ["broken", "line"], chisel.break_line_to_words("broken line")
   end
 
 end
