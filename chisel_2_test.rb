@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative 'chisel'
+require_relative 'chisel_2'
 
 class ChiselTest < Minitest::Test
 
