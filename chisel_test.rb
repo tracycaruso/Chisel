@@ -124,25 +124,24 @@ class ChiselTest < Minitest::Test
     #no idea
   end
 
-  def test_parse_strong_exists
+  def test_parse_strong_first_exists
     chisel = Chisel.new
-    assert chisel.respond_to?(:parse_strong)
+    assert chisel.respond_to?(:parse_strong_first)
   end
 
-  def test_converts_double_asterisks_to_strong_tags
+  def test_converts_first_double_asterisk_to_strong_tag
     chisel = Chisel.new
-    assert_equal "<strong>broken", chisel.parse_strong("**broken")
+    assert_equal "<strong>broken", chisel.parse_strong_first("**broken")
   end
 
-  def test_parse_emphasis_exists
+  def test_parse_emphasis_first_exists
     chisel = Chisel.new
-    assert chisel.respond_to?(:parse_emphasis)
+    assert chisel.respond_to?(:parse_emphasis_first)
   end
 
-  def test_converts_single_asterisks_to_em_tags
-    skip
+  def test_converts_first_single_asterisk_to_em_tag
     chisel = Chisel.new
-    assert_equal "<em>Test input</em>", chisel.parse_emphasis("*Test input*")
+    assert_equal "<em>Test", chisel.parse_emphasis_first("*Test")
   end
 
   def test_break_line_to_words_exists
@@ -152,7 +151,52 @@ class ChiselTest < Minitest::Test
 
   def test_break_line_into_words
     chisel = Chisel.new
-    assert_equal ["broken", "line"], chisel.break_line_to_words("broken line")
+    assert_equal ["broken", "line", "broken", "line"], chisel.break_line_to_words(["broken line", "broken line"])
+  end
+
+  def test_parse_strong_last_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_strong_last)
+  end
+
+  def test_converts_last_single_asterisk_to_closing_strong_tag
+    chisel = Chisel.new
+    assert_equal "broken</strong>", chisel.parse_strong_last("broken**")
+  end
+
+  def test_parse_emphasis_last_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_emphasis_last)
+  end
+
+  def test_converts_last_single_asterisk_to_em_tag
+    chisel = Chisel.new
+    assert_equal "Test</em>", chisel.parse_emphasis_last("Test*")
+  end
+
+  def test_parse_asterisks_exists
+    chisel = Chisel.new
+    assert chisel.respond_to?(:parse_asterisks)
+  end
+
+  def test_parse_asterisks_converts_to_opening_strong_tag
+    chisel = Chisel.new
+    assert_equal "<strong>broken", chisel.parse_asterisks("**broken")
+  end
+
+  def test_parse_asterisks_converts_to_opening_em_tag
+    chisel = Chisel.new
+    assert_equal "<em>broken", chisel.parse_asterisks("*broken")
+  end
+
+  def test_parse_asterisks_converts_to_closing_strong_tag
+    chisel = Chisel.new
+    assert_equal "broken</strong>", chisel.parse_asterisks("broken**")
+  end
+
+  def test_parse_asterisks_converts_to_closing_em_tag
+    chisel = Chisel.new
+    assert_equal "broken</em>", chisel.parse_asterisks("broken*")
   end
 
 end

@@ -3,6 +3,7 @@ class Chisel
   def parse(line)
     array_of_lines = break_line(line)
     cycle_through_lines(array_of_lines)
+    single_words = break_line_to_words(array_of_lines)
   end
 
   def break_line(line)
@@ -23,22 +24,38 @@ class Chisel
    line
   end
 
-  def break_line_to_words(line)
-    #line.each do |l|
-    #end
-    ["broken", "line"]
-  end
-
-  def parse_strong(line)
+  def parse_asterisks(line)
     if line[0..1] == "**"
-      line.gsub("**", "<strong>")
+      parse_strong_first(line)
+    elsif line[0] == "*"
+      parse_emphasis_first(line)
+    elsif line[-2..-1] == "**"
+      parse_strong_last(line)
+    elsif line[-1] == "*"
+      parse_emphasis_last(line)
     end
   end
 
-  def parse_emphasis(line)
-    "<em>Test input</em>"
+
+  def break_line_to_words(line)
+    line.join(" ").split
   end
 
+  def parse_strong_first(line)
+    line.sub!("**", "<strong>")
+  end
+
+  def parse_emphasis_first(line)
+      line.sub!("*", "<em>")
+  end
+
+  def parse_strong_last(line)
+      line.sub!("**", "</strong>")
+  end
+
+  def parse_emphasis_last(line)
+      line.sub!("*", "</em>")
+  end
 
   def parse_headers(line)
     if line[0..4] == "#####"
