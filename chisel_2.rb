@@ -3,6 +3,9 @@ class Chisel
   def parse(line)
     array_of_lines = break_line(line)
     cycle_through_lines(array_of_lines)
+    single_words = break_line_to_words(array_of_lines)
+    cycle_through_words(single_words)
+    convert_to_string(single_words)
   end
 
   def break_line(line)
@@ -11,7 +14,11 @@ class Chisel
 
   def cycle_through_lines(line)
     line = line.map{|l| parse_p(l)}
-    line = line.map {|l| parse_headers(l)}
+    line = line.map{|l| parse_headers(l)}
+  end
+
+  def cycle_through_words(line)
+    line.map{|l| parse_asterisks(l)}
   end
 
   def parse_p(line)
@@ -20,9 +27,46 @@ class Chisel
       line.insert(-1, "</p>")
       puts "paragraph"
     end
-   line
+  line
   end
 
+
+  def parse_asterisks(line)
+    if line[0..1] == "**"
+      parse_strong_first(line)
+    elsif line[0] == "*"
+      parse_emphasis_first(line)
+    elsif line[-2..-1] == "**"
+      parse_strong_last(line)
+    elsif line[-1] == "*"
+      parse_emphasis_last(line)
+    end
+  end
+
+  def convert_to_string(line)
+    line.join(" ")
+  end
+
+
+  def break_line_to_words(line)
+    line.join(" ").split
+  end
+
+  def parse_strong_first(line)
+     line.sub!("**", "<strong>")
+  end
+
+  def parse_emphasis_first(line)
+      line.sub!("*", "<em>")
+  end
+
+  def parse_strong_last(line)
+      line.sub!("**", "</strong>")
+  end
+
+  def parse_emphasis_last(line)
+      line.sub!("*", "</em>")
+  end
 
   def parse_headers(line)
     if line[0..4] == "#####"
@@ -67,9 +111,12 @@ class Chisel
 end
 
 document = '# My Life in Desserts
+
 ## Chapter 1: The Beginning
+
 "You just *have* to try the cheesecake," he said. "Ever since it appreared in **Food & Wine** this place has been packed every night."'
 
-chisel = Chisel.new
-#print chisel.break_line(document)
-puts chisel.parse(document)
+parser = Chisel.new
+output = parser.parse(document)
+#print output
+print output
