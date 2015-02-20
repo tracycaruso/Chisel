@@ -99,9 +99,29 @@ class ChiselTest < Minitest::Test
     assert_equal "Test input", chisel.parse("Test input")
   end
 
-  def test_parser_checks_for_one_hash
+  def test_checks_for_five_hashes
     chisel = Chisel.new
-    assert_equal "Test input", chisel.parse("Test input")
+    assert_equal "<h5>Test input</h5>", chisel.parse_headers("#####Test input")
+  end
+
+  def test_checks_for_four_hashes
+    chisel = Chisel.new
+    assert_equal "<h4>Test input</h4>", chisel.parse_headers("####Test input")
+  end
+
+  def test_checks_for_three_hashes
+    chisel = Chisel.new
+    assert_equal "<h3>Test input</h3>", chisel.parse_headers("###Test input")
+  end
+
+  def test_checks_for_two_hashes
+    chisel = Chisel.new
+    assert_equal "<h2>Test input</h2>", chisel.parse_headers("##Test input")
+  end
+
+  def test_checks_for_one_hashes
+    chisel = Chisel.new
+    assert_equal "<h1>Test input</h1>", chisel.parse_headers("#Test input")
   end
 
 
