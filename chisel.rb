@@ -5,6 +5,7 @@ class Chisel
     cycle_through_lines(array_of_lines)
     single_words = break_line_to_words(array_of_lines)
     cycle_through_words(single_words)
+    convert_to_string(single_words)
   end
 
   def break_line(line)
@@ -13,11 +14,11 @@ class Chisel
 
   def cycle_through_lines(line)
     line = line.map{|l| parse_p(l)}
-    line = line.map {|l| parse_headers(l)}
+    line = line.map{|l| parse_headers(l)}
   end
 
   def cycle_through_words(line)
-    line = line.map{|l| parse_asterisks(line)}
+    line.map{|l| parse_asterisks(l)}
   end
 
   def parse_p(line)
@@ -40,7 +41,10 @@ class Chisel
     elsif line[-1] == "*"
       parse_emphasis_last(line)
     end
-    line
+  end
+
+  def convert_to_string(line)
+    line.join(" ")
   end
 
 
@@ -114,5 +118,5 @@ document = '# My Life in Desserts
 
 parser = Chisel.new
 output = parser.parse(document)
-puts output
-#puts output
+#print output
+print output
